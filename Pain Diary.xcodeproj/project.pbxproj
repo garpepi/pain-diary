@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9919EBE1263D3B72001867A9 /* Pain.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9919EBE0263D3B72001867A9 /* Pain.storyboard */; };
 		999F0EBA263BE0B900950A1C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 999F0EB9263BE0B900950A1C /* AppDelegate.swift */; };
 		999F0EBC263BE0B900950A1C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 999F0EBB263BE0B900950A1C /* SceneDelegate.swift */; };
 		999F0EBE263BE0B900950A1C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 999F0EBD263BE0B900950A1C /* ViewController.swift */; };
@@ -17,6 +18,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		9919EBE0263D3B72001867A9 /* Pain.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Pain.storyboard; sourceTree = "<group>"; };
 		999F0EB6263BE0B900950A1C /* Pain Diary.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Pain Diary.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		999F0EB9263BE0B900950A1C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		999F0EBB263BE0B900950A1C /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -39,6 +41,30 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		9919EBDB263D3ABD001867A9 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				9919EBE0263D3B72001867A9 /* Pain.storyboard */,
+				999F0EBF263BE0B900950A1C /* Main.storyboard */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		9919EBDC263D3AC6001867A9 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				999F0EBD263BE0B900950A1C /* ViewController.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		9919EBDF263D3AEE001867A9 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
 		999F0EAD263BE0B900950A1C = {
 			isa = PBXGroup;
 			children = (
@@ -58,10 +84,11 @@
 		999F0EB8263BE0B900950A1C /* Pain Diary */ = {
 			isa = PBXGroup;
 			children = (
+				9919EBDF263D3AEE001867A9 /* Models */,
+				9919EBDC263D3AC6001867A9 /* Controllers */,
+				9919EBDB263D3ABD001867A9 /* Views */,
 				999F0EB9263BE0B900950A1C /* AppDelegate.swift */,
 				999F0EBB263BE0B900950A1C /* SceneDelegate.swift */,
-				999F0EBD263BE0B900950A1C /* ViewController.swift */,
-				999F0EBF263BE0B900950A1C /* Main.storyboard */,
 				999F0EC5263BE0BA00950A1C /* Assets.xcassets */,
 				999F0EC7263BE0BA00950A1C /* LaunchScreen.storyboard */,
 				999F0ECA263BE0BA00950A1C /* Info.plist */,
@@ -129,6 +156,7 @@
 			files = (
 				999F0EC9263BE0BA00950A1C /* LaunchScreen.storyboard in Resources */,
 				999F0EC6263BE0BA00950A1C /* Assets.xcassets in Resources */,
+				9919EBE1263D3B72001867A9 /* Pain.storyboard in Resources */,
 				999F0EC1263BE0B900950A1C /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
