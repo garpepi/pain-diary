@@ -36,7 +36,7 @@
                                 </segments>
                             </segmentedControl>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="R" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="u7f-9G-j77">
-                                <rect key="frame" x="304" y="104" width="22" height="43"/>
+                                <rect key="frame" x="300" y="104" width="22" height="43"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="36"/>
                                 <color key="textColor" red="0.23529411764705882" green="0.23529411764705882" blue="0.2627450980392157" alpha="1" colorSpace="calibratedRGB"/>
@@ -70,9 +70,19 @@
                                 <imageReference key="image" image="trash" catalog="system" symbolScale="large"/>
                             </imageView>
                             <slider opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="5" minValue="0.0" maxValue="10" translatesAutoresizingMaskIntoConstraints="NO" id="eWj-Yo-tTD">
-                                <rect key="frame" x="54" y="721" width="284" height="29"/>
+                                <rect key="frame" x="53" y="721" width="284" height="29"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <connections>
+                                    <action selector="PainMeasurementOnChange:" destination="9cI-OC-EAc" eventType="valueChanged" id="DGR-Bd-lQT"/>
+                                </connections>
                             </slider>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="10" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2cp-HN-Nfp">
+                                <rect key="frame" x="343" y="723" width="18" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="fBW-qD-Did"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -83,6 +93,7 @@
                         <outlet property="BodyPath" destination="rXJ-dw-i89" id="baP-aq-1v3"/>
                         <outlet property="ClearButton" destination="bHI-bD-xz9" id="V0u-RZ-ogQ"/>
                         <outlet property="PainMeasurement" destination="eWj-Yo-tTD" id="x4S-kb-xLs"/>
+                        <outlet property="PainMeasurmentNumber" destination="2cp-HN-Nfp" id="RfO-UV-dpV"/>
                         <outlet property="SaveButton" destination="LQM-vh-HKP" id="5Xv-nc-c6M"/>
                         <outlet property="TouchArea" destination="ezC-Nf-dCd" id="KDy-zx-Ufv"/>
                         <outlet property="TrashTarget" destination="1sj-AO-6dK" id="S8u-Kj-c2Y"/>

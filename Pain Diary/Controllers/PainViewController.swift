@@ -14,11 +14,14 @@ class PainViewController: UIViewController {
   @IBOutlet weak var BodyPath: UIImageView!
   @IBOutlet weak var BodyDirection: UISegmentedControl!
   @IBOutlet weak var TrashTarget: UIImageView!
-  @IBOutlet weak var PainMeasurement: UISlider!
   @IBOutlet weak var TouchArea: UIView!
-  
-  var seletedTarget:UIView = UIView()
 
+  @IBOutlet weak var PainMeasurement: UISlider!
+  @IBOutlet weak var PainMeasurmentNumber: UILabel!
+
+
+
+  var seletedTarget:UIView = UIView()
   var frontPoint:[UIView] = []
   var backPoint:[UIView] = []
 
@@ -30,6 +33,9 @@ class PainViewController: UIViewController {
       self.initView()
       self.BodyPath.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(tappingHandler)))
       self.TrashTarget.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(trashTarget)))
+
+      self.PainMeasurement.setThumbImage(#imageLiteral(resourceName: "WB1"), for: .normal)
+      self.PainMeasurement.value = 0
     }
     
   func initView(){
@@ -68,6 +74,26 @@ class PainViewController: UIViewController {
     // Tag the UIView
     painPoint.tag = 15
     borderSelected(gestureView: painPoint)
+  }
+
+  @IBAction func PainMeasurementOnChange(_ sender: Any) {
+    let value = Int(self.PainMeasurement.value)
+    self.PainMeasurmentNumber.text = String(value)
+    switch value {
+      case 0...1:
+        self.PainMeasurement.setThumbImage(#imageLiteral(resourceName: "WB1"), for: .normal)
+      case 2...3:
+        self.PainMeasurement.setThumbImage(#imageLiteral(resourceName: "WB2"), for: .normal)
+      case 4...5:
+        self.PainMeasurement.setThumbImage(#imageLiteral(resourceName: "WB3"), for: .normal)
+      case 6...8:
+        self.PainMeasurement.setThumbImage(#imageLiteral(resourceName: "WB4"), for: .normal)
+      case 9...10:
+        self.PainMeasurement.setThumbImage(#imageLiteral(resourceName: "WB5"), for: .normal)
+    default:
+      self.PainMeasurement.setThumbImage(#imageLiteral(resourceName: "WB1"), for: .normal)
+    }
+
   }
 
   @IBAction func ClearTarget(_ sender: Any) {
