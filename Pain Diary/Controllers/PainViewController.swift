@@ -29,11 +29,20 @@ class PainViewController: UIViewController {
         // Do any additional setup after loading the view.
       self.initView()
       self.BodyPath.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(tappingHandler)))
+      self.TrashTarget.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(trashTarget)))
     }
     
   func initView(){
     self.ClearButton.layer.cornerRadius = 8
     self.SaveButton.layer.cornerRadius = 8
+  }
+
+  @objc func trashTarget(gesture: UITapGestureRecognizer){
+    if(self.seletedTarget.frame.isEmpty){
+      return
+    }
+
+    self.seletedTarget.removeFromSuperview()
   }
 
   func createPainPoin(x: CGFloat, y:CGFloat){
