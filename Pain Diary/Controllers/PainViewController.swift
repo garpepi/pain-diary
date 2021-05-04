@@ -20,27 +20,116 @@ class PainViewController: UIViewController {
   @IBOutlet weak var PainMeasurmentNumber: UILabel!
 
 
+  struct targetPainPoint{
+    var x:CGFloat
+    var y:CGFloat
+    var painPointMeasurement:Int
+    var tag:Int
+    var direction:String
+  }
 
   var seletedTarget:UIView = UIView()
-  var frontPoint:[UIView] = []
-  var backPoint:[UIView] = []
+  var targetPoints:[Int:targetPainPoint] = [:]
+  var targetIndex:Int = 0
+  let colorPainMeasurement:[UIColor] = [#colorLiteral(red: 0.1921568627, green: 0.7058823529, blue: 0.3882352941, alpha: 1),#colorLiteral(red: 0.3843137255, green: 0.7254901961, blue: 0.3019607843, alpha: 1),#colorLiteral(red: 0.5411764706, green: 0.7411764706, blue: 0.2117647059, alpha: 1),#colorLiteral(red: 0.6941176471, green: 0.7450980392, blue: 0.1137254902, alpha: 1),#colorLiteral(red: 0.8470588235, green: 0.7411764706, blue: 0.01568627451, alpha: 1),#colorLiteral(red: 1, green: 0.7215686275, blue: 0.04705882353, alpha: 1),#colorLiteral(red: 0.968627451, green: 0.6078431373, blue: 0, alpha: 1),#colorLiteral(red: 0.9333333333, green: 0.4941176471, blue: 0, alpha: 1),#colorLiteral(red: 0.8862745098, green: 0.3725490196, blue: 0.003921568627, alpha: 1),#colorLiteral(red: 0.8274509804, green: 0.2431372549, blue: 0.04705882353, alpha: 1),#colorLiteral(red: 0.7647058824, green: 0.05490196078, blue: 0.07843137255, alpha: 1)]
 
 
   override func viewDidLoad() {
       super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+      // Do any additional setup after loading the view.
       self.initView()
       self.BodyPath.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(tappingHandler)))
       self.TrashTarget.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(trashTarget)))
 
-      self.PainMeasurement.setThumbImage(#imageLiteral(resourceName: "WB1"), for: .normal)
+      // Hidden element control
+      hiddenElement()
+
       self.PainMeasurement.value = 0
+      self.PainMeasurement.setThumbImage(#imageLiteral(resourceName: "WB1"), for: .normal)
+      self.PainMeasurement.isHidden = true
     }
     
   func initView(){
     self.ClearButton.layer.cornerRadius = 8
     self.SaveButton.layer.cornerRadius = 8
+  }
+
+  func hiddenElement(){
+    if self.TouchArea.subviews.count > 1 {
+      self.ClearButton.isHidden = false
+      self.SaveButton.isHidden = false
+      self.TrashTarget.isHidden = false
+    }else{
+      self.ClearButton.isHidden = true
+      self.SaveButton.isHidden = true
+      self.TrashTarget.isHidden = true
+    }
+  }
+
+  @IBAction func directionChange(_ sender: Any) {
+    print("change")
+    if self.BodyDirection.selectedSegmentIndex == 0{
+      hideTarget(tagsmin: 2000,tagsmax: 3000)
+    }else{
+      hideTarget(tagsmin: 1000,tagsmax: 2000)
+    }
+    showTarget(direction: self.BodyDirection.selectedSegmentIndex)
+  }
+
+  func hideTarget(tagsmin:Int, tagsmax:Int){
+
+    if(self.TouchArea.subviews.count > 1)
+    {
+      var index = 0
+      for subUIView in self.TouchArea.subviews as [UIView] {
+        if index == 0{
+          index = 1
+          continue
+        }else{
+          print("\(subUIView.tag) ==> \(subUIView.tag > tagsmin && subUIView.tag < tagsmax)")
+          if(subUIView.tag > tagsmin && subUIView.tag < tagsmax){
+            subUIView.isHidden = true
+          }else{
+            continue
+          }
+        }
+      }
+    }
+  }
+
+  func showTarget(direction:Int){
+    if self.TouchArea.subviews.count > 1{
+      var index = 0
+      if direction == 0{
+        for subUIView in self.TouchArea.subviews as [UIView] {
+          if index == 0{
+            index = 1
+            continue
+          }else{
+            if(subUIView.tag > 1000 && subUIView.tag < 2000){
+              subUIView.isHidden = false
+            }else{
+              continue
+            }
+          }
+        }
+      }else{
+        for subUIView in self.TouchArea.subviews as [UIView] {
+          if index == 0{
+            index = 1
+            continue
+          }else{
+            if(subUIView.tag > 2000 && subUIView.tag < 3000){
+              subUIView.isHidden = false
+            }else{
+              continue
+            }
+          }
+        }
+      }
+    }
+
   }
 
   @objc func trashTarget(gesture: UITapGestureRecognizer){
@@ -70,16 +159,33 @@ class PainViewController: UIViewController {
     painPoint.addGestureRecognizer(UIPanGestureRecognizer(target: self, action: #selector(panningHandler))) // for dragging
     painPoint.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(selectedTapHandler))) // for selecting
 
-    frontPoint.append(painPoint)
     // Tag the UIView
-    painPoint.tag = 15
+    let tagIndex = targetTagging()
+    painPoint.tag = tagIndex
+
+    // Assign Value
+
+    if self.BodyDirection.selectedSegmentIndex == 0{
+      targetPoints[tagIndex] = targetPainPoint.init(x: x, y: y, painPointMeasurement: 0, tag: tagIndex, direction: "Front")
+    }else{
+      targetPoints[tagIndex] = targetPainPoint.init(x: x, y: y, painPointMeasurement: 0, tag: tagIndex, direction: "Back")
+    }
+
+    // UI Control
     borderSelected(gestureView: painPoint)
+    // Hidden element control
+    hiddenElement()
+    sliderControl()
   }
 
-  @IBAction func PainMeasurementOnChange(_ sender: Any) {
-    let value = Int(self.PainMeasurement.value)
-    self.PainMeasurmentNumber.text = String(value)
-    switch value {
+  func sliderControl(painValue: Float = 0.0){
+    self.PainMeasurement.isHidden = false
+    self.PainMeasurement.value = painValue
+    setupSlider(painValue: Int(painValue))
+  }
+
+  func setupSlider(painValue: Int){
+    switch painValue {
       case 0...1:
         self.PainMeasurement.setThumbImage(#imageLiteral(resourceName: "WB1"), for: .normal)
       case 2...3:
@@ -93,20 +199,48 @@ class PainViewController: UIViewController {
     default:
       self.PainMeasurement.setThumbImage(#imageLiteral(resourceName: "WB1"), for: .normal)
     }
+    self.PainMeasurmentNumber.text = String(painValue)
+  }
+
+  func targetTagging()-> Int{
+    targetIndex+=1
+    if self.BodyDirection.selectedSegmentIndex == 0{
+      return 1000 + targetIndex
+    }else{
+      return 2000 + targetIndex
+    }
+  }
+
+  @IBAction func PainMeasurementOnChange(_ sender: Any) {
+    if !self.seletedTarget.frame.isEmpty{
+      // get value
+      let value = Int(self.PainMeasurement.value)
+
+      // set slider
+      self.PainMeasurmentNumber.text = String(value)
+      self.setupSlider(painValue: value)
+      self.targetPoints[self.seletedTarget.tag]?.painPointMeasurement = value
+
+      // set selected
+      self.seletedTarget.tintColor = self.colorPainMeasurement[value]
+    }
 
   }
 
-  @IBAction func ClearTarget(_ sender: Any) {
-    if let foundView = self.TouchArea.viewWithTag(15) {
-        foundView.removeFromSuperview()
-    }
 
-    for subUIView in self.TouchArea.subviews as [UIView] {
-      if let foundView = subUIView.viewWithTag(15) {
-          foundView.removeFromSuperview()
+  @IBAction func ClearTarget(_ sender: Any) {
+    if(self.TouchArea.subviews.count > 1)
+    {
+      var index = 0
+      for subUIView in self.TouchArea.subviews as [UIView] {
+        if index == 0{
+          index = 1
+          continue
+        }else{
+          subUIView.removeFromSuperview()
+        }
       }
     }
-
   }
 
   @objc func tappingHandler(gesture: UITapGestureRecognizer){
@@ -119,6 +253,15 @@ class PainViewController: UIViewController {
     // set border
     // MARK ASK
     borderSelected(gestureView: gesture.view!)
+    self.PainMeasurement.isHidden = false
+
+    //Set Value
+    let tags = self.seletedTarget.tag
+    if let painScale = targetPoints[tags]?.painPointMeasurement{
+      sliderControl(painValue: Float(painScale))
+    }
+
+
   }
 
   func borderSelected(gestureView: UIView){
@@ -142,6 +285,9 @@ class PainViewController: UIViewController {
         draggedView?.center = location
         //print(self.BodyPath.layer.colorOfPoint(point: location))
       }
+
+      // Update the data
+
   }
 
 }

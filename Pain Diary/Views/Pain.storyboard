@@ -34,6 +34,9 @@
                                     <segment title="Front"/>
                                     <segment title="Back"/>
                                 </segments>
+                                <connections>
+                                    <action selector="directionChange:" destination="9cI-OC-EAc" eventType="valueChanged" id="6rz-Em-btf"/>
+                                </connections>
                             </segmentedControl>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="R" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="u7f-9G-j77">
                                 <rect key="frame" x="300" y="104" width="22" height="43"/>
@@ -76,8 +79,8 @@
                                     <action selector="PainMeasurementOnChange:" destination="9cI-OC-EAc" eventType="valueChanged" id="DGR-Bd-lQT"/>
                                 </connections>
                             </slider>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="10" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2cp-HN-Nfp">
-                                <rect key="frame" x="343" y="723" width="18" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2cp-HN-Nfp">
+                                <rect key="frame" x="343" y="723" width="11" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
