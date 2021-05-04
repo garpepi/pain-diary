@@ -19,7 +19,6 @@ class PainViewController: UIViewController {
   @IBOutlet weak var PainMeasurement: UISlider!
   @IBOutlet weak var PainMeasurmentNumber: UILabel!
 
-
   struct targetPainPoint{
     var x:CGFloat
     var y:CGFloat
@@ -27,7 +26,7 @@ class PainViewController: UIViewController {
     var tag:Int
     var direction:String
   }
-
+  
   var seletedTarget:UIView = UIView()
   var targetPoints:[Int:targetPainPoint] = [:]
   var targetIndex:Int = 0
@@ -49,7 +48,36 @@ class PainViewController: UIViewController {
       self.PainMeasurement.setThumbImage(#imageLiteral(resourceName: "WB1"), for: .normal)
       self.PainMeasurement.isHidden = true
     }
-    
+
+  override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+    if segue.identifier == "goToAddPage" {
+        if let nextViewController = segue.destination as? AddViewController {
+          print(targetPoints)
+          // parse Parameter
+          // parse point
+          var front:Int = 0
+          var back:Int = 0
+
+          for point in targetPoints {
+            if(point.value.direction == "Front"){
+              front += 1
+            }else{
+              back += 1
+            }
+            let tempPoint: painPoint = painPoint(x: Double(point.value.x), y: Double(point.value.y), painScale: point.value.painPointMeasurement, direction: point.value.direction)
+            nextViewController.painPoints.append(tempPoint)
+          }
+
+          // parse header info
+          nextViewController.front = front
+          nextViewController.back = back
+        }
+    }
+  }
+
+  @IBAction func saveButtonClicked(_ sender: Any) {
+    performSegue(withIdentifier: "goToAddPage", sender: self)
+  }
   func initView(){
     self.ClearButton.layer.cornerRadius = 8
     self.SaveButton.layer.cornerRadius = 8

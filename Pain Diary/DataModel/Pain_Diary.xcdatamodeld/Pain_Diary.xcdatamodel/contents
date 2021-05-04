@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="18154" systemVersion="20E232" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="History" representedClassName="History" syncable="YES" codeGenerationType="class">
+        <attribute name="back" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="date" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="flag" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="front" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="notes" optional="YES" attributeType="String"/>
+        <relationship name="painPointLocations" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="PainPointLocation" inverseName="history" inverseEntity="PainPointLocation"/>
+    </entity>
+    <entity name="PainPointLocation" representedClassName="PainPointLocation" syncable="YES" codeGenerationType="class">
+        <attribute name="direction" optional="YES" attributeType="String"/>
+        <attribute name="painScale" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="x" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="y" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <relationship name="history" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="History" inverseName="painPointLocations" inverseEntity="History"/>
+    </entity>
+    <elements>
+        <element name="History" positionX="-63" positionY="-18" width="128" height="119"/>
+        <element name="PainPointLocation" positionX="-54" positionY="18" width="128" height="104"/>
+    </elements>
+</model>

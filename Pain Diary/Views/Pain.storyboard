@@ -65,6 +65,10 @@
                                 <state key="normal" title="Save">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
+                                <connections>
+                                    <action selector="saveButtonClicked:" destination="9cI-OC-EAc" eventType="touchUpInside" id="xZk-PF-xc1"/>
+                                    <segue destination="wfe-g1-veB" kind="presentation" identifier="goToAddPage" id="60W-oU-CAI"/>
+                                </connections>
                             </button>
                             <imageView clipsSubviews="YES" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" highlighted="YES" adjustsImageSizeForAccessibilityContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1sj-AO-6dK">
                                 <rect key="frame" x="321" y="649" width="54" height="58"/>
@@ -105,6 +109,14 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lyR-dg-y6y" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1560" y="-375.35545023696682"/>
+        </scene>
+        <!--Add-->
+        <scene sceneID="BUb-SG-cDr">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Add" id="wfe-g1-veB" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="sMU-dz-AVS" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2449.2307692307691" y="-375.35545023696682"/>
         </scene>
     </scenes>
     <resources>
